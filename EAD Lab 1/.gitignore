@@ -31,4 +31,3 @@ ENV/
 
 # Generated files
 *.docx
-!requirements.txt 
