@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EAD Lab Report - Git and GitHub Demonstration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --gradient-1: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+            --gradient-2: linear-gradient(90deg, #3b82f6, #14b8a6);
+            --gradient-3: linear-gradient(45deg, #f97316, #f43f5e);
+            --gradient-4: linear-gradient(to right, #8b5cf6, #d946ef);
+            --gradient-5: radial-gradient(circle at top right, #06b6d4, #3b82f6);
+            --gradient-6: conic-gradient(from 45deg, #f97316, #ec4899, #8b5cf6, #06b6d4, #f97316);
+            --primary-color: #6366f1;
+            --secondary-color: #a855f7;
+            --accent-color: #ec4899;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .cover-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+            animation: rainbow-border 6s linear infinite;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: var(--gradient-6);
+        }
+
+        .college-logo {
+            width: 180px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .college-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .college-name {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: hue-rotate 6s infinite linear;
+        }
+
+        @keyframes hue-rotate {
+            from {
+                filter: hue-rotate(0deg);
+            }
+            to {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        .lab-title {
+            font-size: 24px;
+            color: var(--secondary-color);
+            margin: 20px 0;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .lab-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 3px;
+            background: var(--gradient-2);
+        }
+
+        .submission-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+            text-align: left;
+        }
+
+        .submitted-by, .submitted-to {
+            padding: 25px;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submitted-by::before, .submitted-to::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-3);
+        }
+
+        .submitted-by:hover, .submitted-to:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .github-details {
+            margin-top: 40px;
+            padding: 25px;
+            background: var(--gradient-5);
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+            color: white;
+        }
+
+        .github-details a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .section {
+            margin: 50px 0;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-4);
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .theory-point, .objective-point {
+            margin-bottom: 20px;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            background-image: linear-gradient(white, white), var(--gradient-1);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+
+        .theory-point:hover, .objective-point:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .implementation-step {
+            background: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .implementation-step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-2);
+        }
+
+        .git-command {
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .git-command::before {
+            content: '$ ';
+            color: #93c5fd;
+            opacity: 0.7;
+        }
+
+        .git-command:hover {
+            background: linear-gradient(135deg, #312e81, #1e1b4b);
+            transform: translateX(5px);
+        }
+
+        .command-output {
+            background: var(--bg-primary);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+            margin-top: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .command-output ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .command-output li {
+            color: var(--text-secondary);
+            padding: 3px 0;
+            white-space: pre;
+        }
+
+        .implementation-summary {
+            background: var(--gradient-5);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 40px;
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            background-image: linear-gradient(white, white), var(--gradient-4);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .copy-notification.show {
+            display: block;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 28px;
+            padding-bottom: 10px;
+            position: relative;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: var(--gradient-2);
+        }
+
+        .section-content {
+            margin-top: 20px;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Progress bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient-6);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .submission-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .college-name {
+                font-size: 24px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+
+            .implementation {
+                padding: 20px;
+            }
+
+            .implementation-step {
+                padding: 15px;
+            }
+
+            .stat-item {
+                padding: 15px;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0f172a;
+                --bg-secondary: #1e293b;
+                --text-primary: #e2e8f0;
+                --text-secondary: #94a3b8;
+            }
+
+            .theory-point, .objective-point, .stat-item {
+                background-image: linear-gradient(#1e293b, #1e293b), var(--gradient-1);
+            }
+
+            .git-command {
+                background: linear-gradient(135deg, #020617, #0f172a);
+            }
+
+            .git-command:hover {
+                background: linear-gradient(135deg, #0f172a, #020617);
+            }
+        }
+
+        /* Add rainbow animation for special elements */
+        @keyframes rainbow-border {
+            0% { border-color: #f97316; }
+            25% { border-color: #ec4899; }
+            50% { border-color: #8b5cf6; }
+            75% { border-color: #06b6d4; }
+            100% { border-color: #f97316; }
+        }
+
+        .cover-page {
+            border: 3px solid transparent;
+            animation: rainbow-border 6s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="container">
+        <!-- Cover Page -->
+        <div class="cover-page">
+            <img src="/static/Screenshot 2025-06-01 125244.png" alt="GCES Logo" class="college-logo">
+            <div class="college-name">Gandaki College of Engineering and Science</div>
+            <h1>Enterprise Application Development</h1>
+            <div class="lab-title">Lab Report: Git and GitHub Demonstration</div>
+            <div class="lab-info">Lab: 01</div>
+            
+            <div class="submission-details">
+                <div class="submitted-by">
+                    <h3>Submitted By:</h3>
+                    <p>Bishal Koirala</p>
+                    <p>Roll No: 15</p>
+                </div>
+                <div class="submitted-to">
+                    <h3>Submitted To:</h3>
+                    <p>Er. Prativa Nyaupane</p>
+                    <p>Lecturer, Gandaki College of Engineering and Science</p>
+                </div>
+            </div>
+
+            <div class="github-details">
+                <p><strong>GitHub Profile Name:</strong> koiralabishal</p>
+                <p><strong>GitHub Repository Name:</strong> EAD-Lab</p>
+                <p><strong>Repository Link:</strong> <a href="https://github.com/koiralabishal/EAD-Lab" target="_blank">https://github.com/koiralabishal/EAD-Lab</a></p>
+            </div>
+
+            <!-- Add Download Button -->
+            <div class="download-section" style="margin-top: 20px; text-align: center;">
+                <button onclick="downloadReport()" class="download-button" style="
+                    padding: 12px 24px;
+                    font-size: 16px;
+                    background: var(--gradient-1);
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: transform 0.3s ease;
+                    box-shadow: var(--shadow-md);
+                ">
+                    <i class="fas fa-download"></i> Download as DOCX
+                </button>
+            </div>
+        </div>
+
+        <!-- Objectives -->
+        <div class="section objectives">
+            <h2>Objectives</h2>
+            <div class="section-content">
+                <div class="objective-point">
+                    <h4>1. Version Control Understanding</h4>
+                    <div class="point-content">
+                        <ul>
+                            <li>Master the fundamental concepts of Git version control system</li>
+                            <li>Understand distributed version control principles</li>
+                            <li>Learn repository management and initialization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="objective-point">
+                    <h4>2. Branch Management</h4>
+                    <div class="point-content">
+                        <ul>
+                            <li>Create and manage multiple branches effectively</li>
+                            <li>Implement proper branching strategies</li>
+                            <li>Handle branch synchronization with remote repository</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="objective-point">
+                    <h4>3. Collaboration Skills</h4>
+                    <div class="point-content">
+                        <ul>
+                            <li>Master pull request workflow</li>
+                            <li>Practice code review processes</li>
+                            <li>Learn team collaboration techniques</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Theory -->
+        <div class="section theory">
+            <h2>Theory</h2>
+            <div class="section-content">
+                <div class="theory-point">
+                    <h4>1. Git Version Control System</h4>
+                    <div class="point-content">
+                        <ul>
+                            <li>Distributed version control system for tracking changes</li>
+                            <li>Enables multiple developers to work simultaneously</li>
+                            <li>Maintains complete history of source code changes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="theory-point">
+                    <h4>2. Git Repository Structure</h4>
+                    <div class="point-content">
+                        <ul>
+                            <li>Working Directory: Where files are edited</li>
+                            <li>Staging Area: Preparation for commits</li>
+                            <li>Local Repository: Stores commit history</li>
+                            <li>Remote Repository: Centralized storage on GitHub</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="theory-point">
+                    <h4>3. Branching and Merging</h4>
+                    <div class="point-content">
+                        <ul>
+                            <li>Branches allow parallel development</li>
+                            <li>Feature branches isolate new development</li>
+                            <li>Merging combines changes from different branches</li>
+                            <li>Pull requests facilitate code review</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Implementation Process -->
+        <div class="section implementation">
+            <div class="implementation-header">
+                <h2>Implementation Process</h2>
+                <p>Step-by-step guide through the Git workflow implementation with detailed commands and explanations.</p>
+            </div>
+            <div class="section-content">
+                <div class="step-navigator">
+                    <div class="step-dot" data-step="Project Setup"></div>
+                    <div class="step-dot" data-step="Git Init"></div>
+                    <div class="step-dot" data-step="Remote Setup"></div>
+                    <div class="step-dot" data-step="Branch Management"></div>
+                    <div class="step-dot" data-step="Feature Development"></div>
+                    <div class="step-dot" data-step="Merge Process"></div>
+                    <div class="step-dot" data-step="Verification"></div>
+                </div>
+                <div class="implementation-steps">
+                    <!-- Step 1 -->
+                    <div class="implementation-step">
+                        <h4>Step 1: Project Setup</h4>
+                        <div class="verification-steps">
+                            <div class="command-group">
+                                <h4>1. Create Project Directory</h4>
+                                <div class="git-command">mkdir EAD-Lab-01</div>
+                                <div class="git-command">cd EAD-Lab-01</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="implementation-step">
+                        <h4>Step 2: Git Repository Setup</h4>
+                        <div class="verification-steps">
+                            <div class="command-group">
+                                <h4>1. Initialize Repository</h4>
+                                <div class="git-command">git init</div>
+                                <div class="command-output">
+                                    <ul>
+                                        <li>Initialized empty Git repository in D:/EAD Lab/EAD Lab 1/.git/</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="implementation-step">
+                        <h4>Step 3: Remote Repository Integration</h4>
+                        <div class="verification-steps">
+                            <div class="command-group">
+                                <h4>1. Add Remote Repository</h4>
+                                <div class="git-command">git remote add EAD https://github.com/koiralabishal/EAD-Lab.git</div>
+                                <div class="git-command">git remote -v</div>
+                                <div class="command-output">
+                                    <ul>
+                                        <li>EAD     https://github.com/koiralabishal/EAD-Lab.git (fetch)</li>
+                                        <li>EAD     https://github.com/koiralabishal/EAD-Lab.git (push)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="implementation-step">
+                        <h4>Step 4: Branch Management</h4>
+                        <div class="verification-steps">
+                            <div class="command-group">
+                                <h4>1. View Branch Structure</h4>
+                                <div class="git-command">git branch -a</div>
+                                <div class="command-output">
+                                    <ul>
+                                        <li>  bugfid</li>
+                                        <li>* main</li>
+                                        <li>  remotes/EAD/bugfid</li>
+                                        <li>  remotes/EAD/develop</li>
+                                        <li>  remotes/EAD/feature</li>
+                                        <li>  remotes/EAD/main</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="implementation-step">
+                        <h4>Step 5: Feature Development and Pull Request</h4>
+                        <div class="verification-steps">
+                            <div class="command-group">
+                                <h4>1. Feature Branch Work</h4>
+                                <div class="git-command">git checkout feature</div>
+                                <div class="command-output">
+                                    <ul>
+                                        <li>Switched to branch 'feature'</li>
+                                        <li>Your branch is up to date with 'EAD/feature'</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="command-group">
+                                <h4>2. Make Changes and Commit</h4>
+                                <div class="git-command">git add index.html</div>
+                                <div class="git-command">git commit -m "feat: Add modified EAD Lab 1"</div>
+                                <div class="command-output">
+                                    <ul>
+                                        <li>[feature 646eaee] Add modified EAD Lab 1</li>
+                                        <li>1 file changed, 150 insertions(+), 0 deletions(-)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="command-group">
+                                <h4>3. Push Feature Branch</h4>
+                                <div class="git-command">git push EAD feature</div>
+                                <div class="command-output">
+                                    <ul>
+                                        <li>To https://github.com/koiralabishal/EAD-Lab.git</li>
+                                        <li>   0829ef0..646eaee  feature -> feature</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="command-group">
+                                <h4>4. Create Pull Request (Feature to Develop)</h4>
+                                <div class="git-command">gh pr create --base develop --head feature --title "Add EAD Lab 1 Modified" --body "Added lab report with implementation details"</div>
+                                <div class="command-output">
+                                    <ul>
+                                        <li>Creating pull request for feature into develop in koiralabishal/EAD-Lab</li>
+                                        <li>https://github.com/koiralabishal/EAD-Lab/pull/1</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="implementation-step">
+                        <h4>Step 6: Merge Process</h4>
+                        <div class="verification-steps">
+                            <div class="command-group">
+                                <h4>1. Merge Feature into Develop</h4>
+                                <div class="git-command">git checkout develop</div>
+                                <div class="git-command">git pull EAD develop</div>
+                                <div class="git-command">git merge feature --no-ff</div>
+                                <div class="command-output">
+                                    <ul>
+                                        <li>Switched to branch 'develop'</li>
+                                        <li>Already up to date.</li>
+                                        <li>Merge made by the 'recursive' strategy.</li>
+                                        <li>index.html | 150 ++++++++++++++++++</li>
+                                        <li>1 file changed, 150 insertions(+)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="command-group">
+                                <h4>2. Push Develop Branch</h4>
+                                <div class="git-command">git push EAD develop</div>
+                                <div class="command-output">
+                                    <ul>
+                                        <li>To https://github.com/koiralabishal/EAD-Lab.git</li>
+                                        <li>   646eaee..d580c75  develop -> develop</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="command-group">
+                                <h4>3. Create Pull Request (Develop to Main)</h4>
+                                <div class="git-command">gh pr create --base main --head develop --title "Merge Develop into Main" --body "Merging completed feature work into main branch"</div>
+                                <div class="command-output">
+                                    <ul>
+                                        <li>Creating pull request for develop into main in koiralabishal/EAD-Lab</li>
+                                        <li>https://github.com/koiralabishal/EAD-Lab/pull/2</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="command-group">
+                                <h4>4. Merge into Main</h4>
+                                <div class="git-command">git checkout main</div>
+                                <div class="git-command">git pull EAD main</div>
+                                <div class="git-command">git merge develop --no-ff</div>
+                                <div class="git-command">git push EAD main</div>
+                                <div class="command-output">
+                                    <ul>
+                                        <li>Switched to branch 'main'</li>
+                                        <li>Already up to date.</li>
+                                        <li>Merge made by the 'recursive' strategy.</li>
+                                        <li>To https://github.com/koiralabishal/EAD-Lab.git</li>
+                                        <li>   d580c75..e892f41  main -> main</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="command-group">
+                                <h4>5. Clean Up Feature Branch</h4>
+                                <div class="git-command">git branch -d feature</div>
+                                <div class="git-command">git push EAD --delete feature</div>
+                                <div class="command-output">
+                                    <ul>
+                                        <li>Deleted branch feature (was 646eaee).</li>
+                                        <li>To https://github.com/koiralabishal/EAD-Lab.git</li>
+                                        <li> - [deleted]         feature</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 7 -->
+                    <div class="implementation-step">
+                        <h4>Step 7: Final Verification</h4>
+                        <div class="verification-steps">
+                            <div class="command-group">
+                                <h4>1. Repository Status</h4>
+                                <div class="git-command">git status</div>
+                                <div class="command-output">
+                                    <ul>
+                                        <li>On branch main</li>
+                                        <li>Your branch is up to date with 'EAD/main'</li>
+                                        <li>nothing to commit, working tree clean</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Implementation Summary after all steps but before closing the implementation section -->
+        <div class="implementation-summary">
+            <div class="summary-title">
+                <i>📊</i> Implementation Overview
+            </div>
+            <div class="summary-stats">
+                <div class="stat-item">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Total Steps</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Branches Created</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">18</div>
+                    <div class="stat-label">Git Commands</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Pull Requests</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conclusion -->
+    <div class="section conclusion">
+        <h2>Conclusion</h2>
+        <div class="section-content">
+            <div class="theory-point">
+                <h4>Achievements</h4>
+                <div class="point-content">
+                    <ul>
+                        <li>Successfully implemented Git version control system</li>
+                        <li>Mastered branch creation and management</li>
+                        <li>Learned pull request workflow and collaboration</li>
+                        <li>Gained practical experience with GitHub</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="theory-point">
+                <h4>Learning Outcomes</h4>
+                <div class="point-content">
+                    <ul>
+                        <li>Understanding of modern version control practices</li>
+                        <li>Proficiency in Git commands and operations</li>
+                        <li>Experience with collaborative development workflows</li>
+                        <li>Knowledge of professional Git branching strategies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">↑</div>
+
+    <div class="copy-notification" id="copyNotification">Command copied to clipboard!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Copy command functionality
+            document.querySelectorAll('.git-command').forEach(cmd => {
+                cmd.addEventListener('click', async () => {
+                    const text = cmd.textContent.trim();
+                    try {
+                        await navigator.clipboard.writeText(text);
+                        const notification = document.getElementById('copyNotification');
+                        notification.textContent = 'Command copied to clipboard! ✓';
+                        notification.classList.add('show');
+                        setTimeout(() => {
+                            notification.classList.remove('show');
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Failed to copy:', err);
+                    }
+                });
+            });
+
+            // Progress bar
+            window.onscroll = () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById('progressBar').style.width = scrolled + '%';
+            };
+
+            // Intersection Observer for fade-in animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Apply fade-in animation to sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'all 0.5s ease';
+                observer.observe(section);
+            });
+        });
+
+        async function downloadReport() {
+            try {
+                const response = await fetch('/download');
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'EAD_Lab_Report_1.docx';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            } catch (error) {
+                console.error('Error downloading report:', error);
+                alert('Error downloading report. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html> 
