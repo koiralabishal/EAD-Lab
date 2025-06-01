@@ -20,4 +20,7 @@ def download_report():
                     download_name='EAD_Lab_Report_1.docx')
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    # Get port from environment variable or use 5000 as default
+    port = int(os.environ.get('PORT', 5000))
+    # In production, set debug to False
+    app.run(host='0.0.0.0', port=port, debug=False) 
