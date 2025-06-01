@@ -47,6 +47,35 @@
             border-radius: 3px;
             font-family: monospace;
         }
+        .git-commands {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .git-commands code {
+            background-color: #34495e;
+            color: #3498db;
+            padding: 5px 10px;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #3498db;
+            text-align: center;
+            color: #666;
+        }
+        .learning-outcomes {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .learning-outcomes h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -125,6 +154,41 @@
                 <li>Merged pull requests</li>
                 <li>Initial project files</li>
             </ul>
+        </div>
+
+        <!-- New Sections Added -->
+        <div class="git-commands">
+            <h2>Useful Git Commands Reference</h2>
+            <ul>
+                <li><code>git init</code> - Initialize a new Git repository</li>
+                <li><code>git clone [url]</code> - Clone a repository from remote source</li>
+                <li><code>git branch [branch-name]</code> - Create a new branch</li>
+                <li><code>git checkout [branch-name]</code> - Switch to a branch</li>
+                <li><code>git add [file]</code> - Add file to staging area</li>
+                <li><code>git commit -m "[message]"</code> - Commit changes</li>
+                <li><code>git push origin [branch]</code> - Push changes to remote</li>
+                <li><code>git pull</code> - Update local repository</li>
+                <li><code>git merge [branch]</code> - Merge specified branch into current branch</li>
+            </ul>
+        </div>
+
+        <div class="learning-outcomes">
+            <h3>Learning Outcomes</h3>
+            <ul>
+                <li>Understanding of Git version control system</li>
+                <li>Experience with branch management and merging strategies</li>
+                <li>Knowledge of pull request workflows</li>
+                <li>Practice with SSH authentication in Git</li>
+                <li>Understanding of Git collaboration features</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>Enterprise Application Development Lab Report</p>
+            <p>Created: <span id="currentDate"></span></p>
+            <script>
+                document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+            </script>
         </div>
     </div>
 </body>
