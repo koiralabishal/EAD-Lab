@@ -40,6 +40,11 @@
             padding: 10px;
             border-left: 3px solid #3498db;
             background-color: #f8f9fa;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .step:hover {
+            transform: translateX(10px);
         }
         code {
             background-color: #f0f0f0;
@@ -47,31 +52,127 @@
             border-radius: 3px;
             font-family: monospace;
         }
+        .git-commands {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .git-commands code {
+            background-color: #34495e;
+            color: #3498db;
+            padding: 5px 10px;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #3498db;
+            text-align: center;
+            color: #666;
+        }
+        .learning-outcomes {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .learning-outcomes h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .progress-tracker {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .progress-bar {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            height: 20px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background-color: #2ecc71;
+            height: 100%;
+            width: 100%;
+            animation: fillProgress 2s ease-out;
+        }
+        .best-practices {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        .tips-section {
+            background-color: #d4edda;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        @keyframes fillProgress {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        .collapsible {
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .active, .collapsible:hover {
+            background-color: #2980b9;
+        }
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f8f9fa;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Git Operations Lab Report</h1>
 
+        <div class="progress-tracker">
+            <h2>Lab Progress</h2>
+            <p>All tasks completed successfully!</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+
         <div class="cover-info">
             <h2>Cover Page</h2>
             <p><strong>GitHub Profile Name:</strong> [Your GitHub Username]</p>
             <p><strong>Repository Name:</strong> [Your Repository Name]</p>
+            <p><strong>Date Completed:</strong> <span id="completionDate"></span></p>
         </div>
 
         <div class="steps">
             <h2>Lab Steps Documentation</h2>
             
-            <div class="step">
-                <h3>Step 1: Creating a New Folder with Text File</h3>
+            <button class="collapsible">Step 1: Creating a New Folder with Text File</button>
+            <div class="content">
                 <ul>
                     <li>Created a new folder named "lab1"</li>
                     <li>Created a text file named "sample.txt" inside the folder</li>
                 </ul>
             </div>
 
-            <div class="step">
-                <h3>Step 2: Creating a Public Git Repository</h3>
+            <button class="collapsible">Step 2: Creating a Public Git Repository</button>
+            <div class="content">
                 <ul>
                     <li>Logged into GitHub account</li>
                     <li>Created a new public repository</li>
@@ -79,8 +180,8 @@
                 </ul>
             </div>
 
-            <div class="step">
-                <h3>Step 3: Pushing to Repository using SSH</h3>
+            <button class="collapsible">Step 3: Pushing to Repository using SSH</button>
+            <div class="content">
                 <ul>
                     <li>Generated SSH key pair</li>
                     <li>Added SSH public key to GitHub account</li>
@@ -90,8 +191,8 @@
                 </ul>
             </div>
 
-            <div class="step">
-                <h3>Step 4: Creating Multiple Branches</h3>
+            <button class="collapsible">Step 4: Creating Multiple Branches</button>
+            <div class="content">
                 <p>Created the following branches:</p>
                 <ul>
                     <li><code>develop</code> - Development branch</li>
@@ -100,16 +201,16 @@
                 </ul>
             </div>
 
-            <div class="step">
-                <h3>Step 5: Creating Pull Requests</h3>
+            <button class="collapsible">Step 5: Creating Pull Requests</button>
+            <div class="content">
                 <ul>
                     <li>From <code>feature</code> to <code>develop</code> branch</li>
                     <li>From <code>develop</code> to <code>main</code> branch</li>
                 </ul>
             </div>
 
-            <div class="step">
-                <h3>Step 6: Merging Branches</h3>
+            <button class="collapsible">Step 6: Merging Branches</button>
+            <div class="content">
                 <ul>
                     <li>Successfully merged <code>feature</code> branch into <code>develop</code></li>
                     <li>Successfully merged <code>develop</code> branch into <code>main</code></li>
@@ -117,15 +218,84 @@
             </div>
         </div>
 
-        <div class="verification">
-            <h2>Verification</h2>
-            <p>All operations were completed successfully, and the repository now contains:</p>
+        <div class="best-practices">
+            <h2>Git Best Practices</h2>
             <ul>
-                <li>Multiple branches (<code>main</code>, <code>develop</code>, <code>feature</code>, <code>bugfix</code>)</li>
-                <li>Merged pull requests</li>
-                <li>Initial project files</li>
+                <li>Write clear, concise commit messages</li>
+                <li>Commit early and often</li>
+                <li>Don't commit directly to main branch</li>
+                <li>Review changes before committing</li>
+                <li>Keep branches up to date</li>
+                <li>Delete merged branches</li>
             </ul>
         </div>
+
+        <div class="tips-section">
+            <h2>Pro Tips</h2>
+            <ul>
+                <li>Use <code>.gitignore</code> to exclude unnecessary files</li>
+                <li>Configure SSH for secure authentication</li>
+                <li>Always pull before pushing changes</li>
+                <li>Use meaningful branch names</li>
+                <li>Keep your local repository synchronized</li>
+            </ul>
+        </div>
+
+        <div class="git-commands">
+            <h2>Useful Git Commands Reference</h2>
+            <ul>
+                <li><code>git init</code> - Initialize a new Git repository</li>
+                <li><code>git clone [url]</code> - Clone a repository from remote source</li>
+                <li><code>git branch [branch-name]</code> - Create a new branch</li>
+                <li><code>git checkout [branch-name]</code> - Switch to a branch</li>
+                <li><code>git add [file]</code> - Add file to staging area</li>
+                <li><code>git commit -m "[message]"</code> - Commit changes</li>
+                <li><code>git push origin [branch]</code> - Push changes to remote</li>
+                <li><code>git pull</code> - Update local repository</li>
+                <li><code>git merge [branch]</code> - Merge specified branch into current branch</li>
+                <li><code>git status</code> - Check repository status</li>
+                <li><code>git log</code> - View commit history</li>
+                <li><code>git diff</code> - Show file differences</li>
+            </ul>
+        </div>
+
+        <div class="learning-outcomes">
+            <h3>Learning Outcomes</h3>
+            <ul>
+                <li>Understanding of Git version control system</li>
+                <li>Experience with branch management and merging strategies</li>
+                <li>Knowledge of pull request workflows</li>
+                <li>Practice with SSH authentication in Git</li>
+                <li>Understanding of Git collaboration features</li>
+                <li>Mastery of basic Git commands</li>
+                <li>Implementation of Git best practices</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>Enterprise Application Development Lab Report</p>
+            <p>Created: <span id="currentDate"></span></p>
+        </div>
     </div>
+
+    <script>
+        // Set current date
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+        document.getElementById('completionDate').textContent = new Date().toLocaleDateString();
+
+        // Add collapsible functionality
+        var coll = document.getElementsByClassName("collapsible");
+        for (var i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
 </body>
 </html> 
